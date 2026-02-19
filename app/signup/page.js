@@ -2,20 +2,18 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
 
-
-export default function Home() {
+export default function Signup() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/login", {
+    const res = await fetch("/api/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,8 +24,7 @@ export default function Home() {
     const data = await res.json();
 
     if (data.success) {
-      localStorage.setItem("token", data.token);
-      router.push("/dashboard");
+      router.push("/");
     } else {
       setMessage(data.message);
     }
@@ -36,15 +33,13 @@ export default function Home() {
   return (
     <div className="container">
       <div className="login-box">
-        <h2 className="logo">Your Logo</h2>
+        <h3>Signup</h3>
 
-        <h3>Login</h3>
-
-        <form onSubmit={handleLogin}>
-          <label>Mobile / Email</label>
+        <form onSubmit={handleSignup}>
+          <label>Email</label>
           <input
             type="text"
-            placeholder="Login with Mobile or Email"
+            placeholder="Enter Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -60,24 +55,11 @@ export default function Home() {
           />
 
           <button type="submit" className="login-btn">
-            Login
+            Signup
           </button>
-          <div className="divider">
-            <span>OR login with</span>
-          </div>
-
-          <button className="google-btn">
-            <FcGoogle size={20} style={{ marginRight: "8px" }} />
-            Continue with Google
-          </button>
-
 
           {message && <p className="error">{message}</p>}
         </form>
-
-        <p className="signup">
-          Don't have an account? <a href="/signup">Sign Up</a>
-        </p>
       </div>
     </div>
   );
