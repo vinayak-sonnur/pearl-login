@@ -17,8 +17,8 @@ A simple authentication system built using Next.js API routes with encrypted pas
 
 ## Developed By
 Vinayak Sonnur
-MCA Final Year Student
+- MCA Final Year Student
 
 ## How to Run
-npm install
-npm run dev
+- npm install
+- npm run dev
